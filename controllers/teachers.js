@@ -18,7 +18,7 @@ exports.getTeacherById = async (req, res, next) => {
     try {
         const teacher = await teacherService.getById(id);
         if (!teacher) {
-            const error = new Error('Instructor not found');
+            const error = new Error('Teacher not found');
             error.statusCode = 404;
             throw error;
         }
