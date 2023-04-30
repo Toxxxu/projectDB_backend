@@ -8,7 +8,7 @@ const db = mysql.createPool({
     port: 3308
 });
 
-/*connection.connect((err) => {
+/*db.connect((err) => {
     if (err) {
       console.error('Error connecting to database: ', err);
       return;

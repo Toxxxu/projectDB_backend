@@ -14,11 +14,6 @@ class TeacherDto {
             teacher.age
         );
     }
-
-    static fromRequest(request) {
-        const { full_name, email, age } = request.body;
-        return new TeacherDto(null, full_name, email, age);
-    }
 }
 
 module.exports = TeacherDto;
