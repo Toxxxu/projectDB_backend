@@ -14,7 +14,7 @@ class Student {
         return rows.map((row) => new Student(row.id_student, row.full_name, row.email, row.id_course, row.age));
     }
 
-    static async findById() {
+    static async findById(id) {
         const [rows] = await db.query('SELECT * FROM students WHERE id_student = ?', [id]);
         if (!rows.length) {
             throw new Error(`Student with ID ${id} not found`);

@@ -22,7 +22,7 @@ class StudentService {
 
     async updateById(id, data) {
         const updatedStudent = await Student.update(id, data);
-        if (updatedStudent) {
+        if (!updatedStudent) {
             throw new Error('Student not found');
         }
         return StudentDto.fromModel(updatedStudent);

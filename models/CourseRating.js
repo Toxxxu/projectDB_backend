@@ -14,7 +14,7 @@ class CourseRating {
         return rows.map((row) => new CourseRating(row.id, row.student_id, row.course_id, row.comment, row.rating));
     }
 
-    static async findById() {
+    static async findById(id) {
         const [rows] = await db.query('SELECT * FROM course_rating WHERE id = ?', [id]);
         if (!rows.length) {
             throw new Error(`Rating wtih ID ${id} not found`);
@@ -24,7 +24,7 @@ class CourseRating {
     }
 
     static async create(rate) {
-        const [result] = await db.query('INSERT INTO course_rating (student_id, course_id, comment, rating)', [rate.student_id, rate.course_id, rate.comment, rate.rating]);
+        const [result] = await db.query('INSERT INTO course_rating (student_id, course_id, comment, rating) VALUES (?, ?, ?, ?)', [rate.student_id, rate.course_id, rate.comment, rate.rating]);
         return new CourseRating(result.insertId, rate.student_id, rate.course_id, rate.comment, rate.rating);
     }
 
