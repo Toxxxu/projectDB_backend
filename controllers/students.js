@@ -6,8 +6,8 @@ const studentService = new StudentService();
 exports.getStudents = async (req, res, next) => {
     try {
         const students = await studentService.getAll();
-        const studentDto = students.map((student) => new StudentDto(student));
-        res.json(studentDto);
+        // const studentDto = students.map((student) => new StudentDto(student));
+        res.json(students);
     } catch (error) {
         next(error);
     }
@@ -22,8 +22,8 @@ exports.getStudentById = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const studentDto = new StudentDto(student);
-        res.json(studentDto);
+        // const studentDto = new StudentDto(student);
+        res.json(student);
     } catch (error) {
         next(error);
     }
@@ -34,8 +34,8 @@ exports.createStudent = async (req, res, next) => {
     const student = { full_name, email, id_course, age };
     try {
         const createdStudent = await studentService.create(student);
-        const studentDto = new StudentDto(createdStudent);
-        res.status(201).json(studentDto);
+        // const studentDto = new StudentDto(createdStudent);
+        res.status(201).json(createdStudent);
     } catch (error) {
         next(error);
     }
@@ -52,8 +52,8 @@ exports.updateStudent = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const studentDto = new StudentDto(updatedStudent);
-        res.json(studentDto);
+        // const studentDto = new StudentDto(updatedStudent);
+        res.json(updatedStudent);
     } catch (error) {
         next(error);
     }
@@ -68,8 +68,8 @@ exports.deleteStudent = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const studentDto = new StudentDto(deletedStudent);
-        res.json(studentDto);
+        // const studentDto = new StudentDto(deletedStudent);
+        res.json(deletedStudent);
     } catch (error) {
         next(error);
     }

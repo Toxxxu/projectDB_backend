@@ -6,8 +6,8 @@ const courseService = new CourseService();
 exports.getCourses = async (req, res, next) => {
     try {
         const courses = await courseService.getAll();
-        const coursesDto = courses.map((course) => new CourseDto(course));
-        res.json(coursesDto);
+        // const coursesDto = courses.map((course) => new CourseDto(course));
+        res.json(courses);
     } catch (error) {
         next(error);
     }
@@ -22,8 +22,8 @@ exports.getCourseById = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const courseDto = new CourseDto(course);
-        res.json(courseDto);
+        // const courseDto = new CourseDto(course);
+        res.json(course);
     } catch (error) {
         next(error);
     }
@@ -34,8 +34,8 @@ exports.createCourse = async (req, res, next) => {
     const course = { name, id_teacher, year, price };
     try {
         const createdcourse = await courseService.create(course);
-        const courseDto = new CourseDto(createdcourse);
-        res.status(201).json(courseDto);
+        // const courseDto = new CourseDto(createdcourse);
+        res.status(201).json(createdcourse);
     } catch (error) {
         next(error);
     }
@@ -52,8 +52,8 @@ exports.updateCourse = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const courseDto = new CourseDto(updatedCourse);
-        res.json(courseDto);
+        // const courseDto = new CourseDto(updatedCourse);
+        res.json(updatedCourse);
     } catch (error) {
         next(error);
     }
@@ -68,8 +68,8 @@ exports.deleteCourse = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const courseDto = new CourseDto(deletedCourse);
-        res.json(courseDto);
+        // const courseDto = new CourseDto(deletedCourse);
+        res.json(deletedCourse);
     } catch (error) {
         next(error);
     }

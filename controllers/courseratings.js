@@ -6,8 +6,8 @@ const courseratingService = new CourseRatingService();
 exports.getCourseRatings = async (req, res, next) => {
     try {
         const courseratings = await courseratingService.getAll();
-        const courseratingDto = courseratings.map((courserating) => new CourseRatingDto(courserating));
-        res.json(courseratingDto);
+        // const courseratingDto = courseratings.map((courserating) => new CourseRatingDto(courserating));
+        res.json(courseratings);
     } catch (error) {
         next(error);
     }
@@ -22,8 +22,8 @@ exports.getCourseRatingById = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const courseratingDto = new CourseRatingDto(courserating);
-        res.json(courseratingDto);
+        // const courseratingDto = new CourseRatingDto(courserating);
+        res.json(courserating);
     } catch (error) {
         next(error);
     }
@@ -34,8 +34,8 @@ exports.createCourseRating = async (req, res, next) => {
     const courserating = { student_id, course_id, comment, rating };
     try {
         const createdCourseRating = await courseratingService.create(courserating);
-        const courseratingDto = new CourseRatingDto(createdCourseRating);
-        res.status(201).json(courseratingDto);
+        // const courseratingDto = new CourseRatingDto(createdCourseRating);
+        res.status(201).json(createdCourseRating);
     } catch (error) {
         next(error);
     }
@@ -52,8 +52,8 @@ exports.updateCourseRating = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const courseratingDto = new CourseRatingDto(updatedCourseRating);
-        res.json(courseratingDto);
+        // const courseratingDto = new CourseRatingDto(updatedCourseRating);
+        res.json(updatedCourseRating);
     } catch (error) {
         next(error);
     }
@@ -68,8 +68,8 @@ exports.deleteCourseRating = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const courseratingDto = new CourseRatingDto(deletedCourseRating);
-        res.json(courseratingDto);
+        // const courseratingDto = new CourseRatingDto(deletedCourseRating);
+        res.json(deletedCourseRating);
     } catch (error) {
         next(error);
     }

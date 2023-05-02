@@ -6,8 +6,8 @@ const teacherService = new TeachersService();
 exports.getTeachers = async (req, res, next) => {
     try {
         const teachers = await teacherService.getAll();
-        const teachersDto = teachers.map((teacher) => new TeacherDto(teacher));
-        res.json(teachersDto);
+        // const teachersDto = teachers.map((teacher) => new TeacherDto(teacher));
+        res.json(teachers);
     } catch (error) {
         next(error);
     }
@@ -22,8 +22,8 @@ exports.getTeacherById = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const teacherDto = new TeacherDto(teacher);
-        res.json(teacherDto);
+        // const teacherDto = new TeacherDto(teacher);
+        res.json(teacher);
     } catch (error) {
         next(error);
     }
@@ -34,8 +34,8 @@ exports.createTeacher = async (req, res, next) => {
     const teacher = { full_name, email, age };
     try {
         const createdTeacher = await teacherService.create(teacher);
-        const teacherDto = new TeacherDto(createdTeacher);
-        res.status(201).json(teacherDto);
+        // const teacherDto = new TeacherDto(createdTeacher);
+        res.status(201).json(createdTeacher);
     } catch (error) {
         next(error);
     }
@@ -52,8 +52,8 @@ exports.updateTeacher = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const teacherDto = new TeacherDto(updatedTeacher);
-        res.json(teacherDto);
+        // const teacherDto = new TeacherDto(updatedTeacher);
+        res.json(updatedTeacher);
     } catch (error) {
         next(error);
     }
@@ -68,8 +68,8 @@ exports.deleteTeacher = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
-        const teacherDto = new TeacherDto(deletedTeacher);
-        res.json(teacherDto);
+        // const teacherDto = new TeacherDto(deletedTeacher);
+        res.json(deletedTeacher);
     } catch (error) {
         next(error);
     }
