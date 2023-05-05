@@ -29,6 +29,21 @@ exports.getCourseById = async (req, res, next) => {
     }
 };
 
+exports.getCoursesByTeacherId = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const courses = await courseService.getCoursesByTeacherId(id);
+        if (!courses) {
+            const error = new Error('Courses not found');
+            error.statusCode = 404;
+            throw error;
+        }
+        res.json(courses);
+    } catch (error) {
+        next(error);
+    }
+};
+
 exports.createCourse = async (req, res, next) => {
     const { name, id_teacher, year, price } = req.body;
     const course = { name, id_teacher, year, price };

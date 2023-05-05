@@ -23,6 +23,14 @@ class Student {
         return new Student(row.id_student, row.full_name, row.email, row.id_course, row.age);
     }
 
+    static async findByIdCourseStudents(id) {
+        const [rows] = await db.query('SELECT students.id_student, students.full_name, students.email, students.id_course, students.age FROM students ' +
+            'JOIN courses ON students.id_course = courses.id_course ' +
+            'WHERE students.id_course = ?', [id]);
+        if(rows.length === 0) return null;
+        return rows.map((row) => new Student(row.id_student, row.full_name, row.email, row.id_course, row.age));
+    }
+
     static async create(student) {
         const [result] = await db.query('INSERT INTO students (full_name, email, id_course, age) VALUES (?, ?, ?, ?)', [student.full_name, student.email, student.id_course, student.age]);
         return new Student(result.insertId, student.full_name, student.email, student.id_course, student.age);

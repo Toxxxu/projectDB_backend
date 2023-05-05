@@ -29,6 +29,21 @@ exports.getStudentById = async (req, res, next) => {
     }
 };
 
+exports.getStudentsByCourseId = async (req, res, next) => {
+    const { id } = req.params;
+    try {
+        const students = await studentService.getStudentsByCourseId(id);
+        if (!students) {
+            const error = new Error('Students not found');
+            error.statusCode = 404;
+            throw error;
+        }
+        res.json(students);
+    } catch (error) {
+        next(error);
+    }
+};
+
 exports.createStudent = async (req, res, next) => {
     const { full_name, email, id_course, age } = req.body;
     const student = { full_name, email, id_course, age };

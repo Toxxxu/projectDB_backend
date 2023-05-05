@@ -20,6 +20,11 @@ class StudentService {
         return StudentDto.fromModel(student);
     }
 
+    async getStudentsByCourseId(id) {
+        const students = await Student.findByIdCourseStudents(id);
+        return students.map(StudentDto.fromModel);
+    }
+
     async updateById(id, data) {
         const updatedStudent = await Student.update(id, data);
         if (!updatedStudent) {

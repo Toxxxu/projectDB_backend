@@ -20,6 +20,11 @@ class CourseService {
         return CourseDto.fromModel(course);
     }
 
+    async getCoursesByTeacherId(id) {
+        const courses = await Course.findByIdTeacherCourses(id);
+        return courses.map(CourseDto.fromModel);
+    }
+
     async updateById(id, data) {
         const updatedCourse = await Course.update(id, data);
         if (!updatedCourse) {
