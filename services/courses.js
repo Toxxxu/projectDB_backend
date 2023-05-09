@@ -22,6 +22,9 @@ class CourseService {
 
     async getCoursesByTeacherId(id) {
         const courses = await Course.findByIdTeacherCourses(id);
+        if (!courses) {
+            throw new Error('Courses not found');
+        }
         return courses.map(CourseDto.fromModel);
     }
 

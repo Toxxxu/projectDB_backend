@@ -22,6 +22,9 @@ class StudentService {
 
     async getStudentsByCourseId(id) {
         const students = await Student.findByIdCourseStudents(id);
+        if (!students) {
+            throw new Error('Students not found');
+        }
         return students.map(StudentDto.fromModel);
     }
 
